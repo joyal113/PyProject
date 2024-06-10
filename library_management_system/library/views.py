@@ -5,7 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.hashers import make_password
 from django.db.models import F
 
-from .models import CustomUser, UserBook
+from .models import CustomUser, UserBook,Book
 from .forms import CustomUserCreationForm, UserLoginForm, PasswordResetForm
 
 # create a function
@@ -53,7 +53,7 @@ def home(request):
         books = UserBook.objects.filter(user=request.user)
         recently_viewed = books.filter(category="recently_viewed").annotate(title=F('book__title'), image_url=F('book__image_url'), pdf_url=F('book__pdf_url')).values('title', 'image_url', 'pdf_url')
         suggested = books.filter(category="suggested").annotate(title=F('book__title'), image_url=F('book__image_url'), pdf_url=F('book__pdf_url')).values('title', 'image_url', 'pdf_url')
-        explore_more = books.filter(category="explore_more").annotate(title=F('book__title'), image_url=F('book__image_url'), pdf_url=F('book__pdf_url')).values('title', 'image_url', 'pdf_url')
+        explore_more = Book.objects.exclude(userbook__user=request.user).values('title', 'image_url', 'pdf_url')
         data["explore_more_books"] = explore_more
         if search:
             searched_books = books.filter(book__title__icontains=search)
