@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin:0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #FFF;
+            border: 1px solid #CCC;
+            border-radius: 10px;
+            opacity: 20;
+            padding: 50px;
+            width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container h2 {
+            margin-top: 0;
+        }
+        .container label {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin: 10px 0 5px;
+        }
+        .container input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px;
+            border: 1px solid #CCC;
+            border-radius: 10px;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #0056b3;
+        }
+        .container p {
+            text-align: center;
+        }
+        .container a {
+            color: #007BFF;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center" ,font-family="Fantasy" ; style="color:brown;"><b>Library Management Systems </b></h1>
+    <br>
+    <h2>Create Account</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+</div>
+<script>
+    function validateForm() {
+        const passwordInput = document.getElementById('password');
+        const password = passwordInput.value;
+
+        // Regular expressions for password criteria
+        const upperCaseRegex = /[A-Z]/;
+        const minLengthRegex = /.{8,}/;
+        const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+        const numericRegex = /\d/;
+
+        // Test if password meets all criteria
+        if (!upperCaseRegex.test(password) || !minLengthRegex.test(password) || !specialCharRegex.test(password) || !numericRegex.test(password)) {
+            document.getElementById('password-error').style.display = 'block';
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission if all criteria are met
+    }
+</script>
+</body>
+</html>

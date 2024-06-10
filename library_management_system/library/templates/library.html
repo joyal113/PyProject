@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="sidebar">
+    <div class="profile">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png">
+        <h2 id="username">{{ user.username }}</h2><br>
+    </div>
+    <ul class="nav-links">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <br>
+        <li><a href="{% url 'home' %}">Profile</a></li>
+        <br>
+        <li><a href="{% url 'home' %}">Settings</a></li>
+        <br>
+        <li><a href="{% url 'home' %}">Profile Photo</a></li>
+        <br>
+    </ul>
+    <div class="sign-out">
+        <a href="{% url 'logout' %}">Sign Out</a>
+    </div>
+</div>
+
+<div class="container">
+    <header>
+        <h1>Welcome, <span id="header-username">{{ user.username }}</span></h1>
+    </header>
+    <nav>
+        <form method="GET">
+            <input type="text" id="search-bar" name="search" placeholder="Search for books here...">
+            <span class="search-icon">&#128269;</span>
+        </form>
+    </nav>
+    {% if search %}
+        <section class="recently-viewed">
+            <h2>Searched for {{ search }}</h2>
+            <div class="book-list" id="recently-viewed-books">
+                {% for book in searched_books %}
+                <div class="book-item">
+                    <a href="{{ book.pdf_url }}" target="_blank">
+                        <img src="{{ book.image_url }}" alt="{{ book.title }}" class="book-image">
+                    </a>
+                    <h3>{{ book.title }}</h3>
+                    <a href="{{ book.pdf_url }}" class="download-link">View Book</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% else %}
+        <section class="recently-viewed">
+            <h2>Recently Viewed Books</h2>
+            <div class="book-list" id="recently-viewed-books">
+                {% for book in recently_viewed %}
+                <div class="book-item">
+                    <a href="{{ book.pdf_url }}" target="_blank">
+                        <img src="{{ book.image_url }}" alt="{{ book.title }}" class="book-image">
+                    </a>
+                    <h3>{{ book.title }}</h3>
+                    <a href="{{ book.pdf_url }}" class="download-link">View Book</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="suggested-books">
+            <h2>Suggested Books</h2>
+            <div class="book-list" id="suggested-books">
+                {% for book in suggested_books %}
+                <div class="book-item">
+                    <a href="{{ book.pdf_url }}" target="_blank">
+                        <img src="{{ book.image_url }}" alt="{{ book.title }}" class="book-image">
+                    </a>
+                    <h3>{{ book.title }}</h3>
+                    <a href="{{ book.pdf_url }}" class="download-link">View Book</a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+    <section class="explore-more">
+        <h2>Explore More</h2>
+        <div class="book-list" id="explore-more-books">
+            {% for book in explore_more_books %}
+            <div class="book-item">
+                <a href="{{ book.pdf_url }}" target="_blank">
+                    <img src="{{ book.image_url }}" alt="{{ book.title }}" class="book-image">
+                </a>
+                <h3>{{ book.title }}</h3>
+                <a href="{{ book.pdf_url }}" class="download-link">View Book</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% else %}
+<p>You are not logged in!</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}

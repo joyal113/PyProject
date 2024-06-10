@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Front Face</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #FFF;
+            border: 1px solid #CCC;
+            border-radius: 10px;
+            opacity: 0.9;
+            padding: 50px;
+            width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+       .container h2 {
+            color: #14110f;
+       }
+
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .nav-item-nav-link {
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #70635c;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            display: block;
+        }
+        .nav-item-nav-link:hover {
+            background-color: #362b26;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Welcome to Library Managment System</h2><br>
+    <div class="navbar">
+        <a class="nav-item-nav-link" id="login" href="{% url 'login' %}">Login</a><br>
+        <a class="nav-item-nav-link" id="admin" href="{% url 'library-admin' %}">Admin</a><br>
+        <a class="nav-item-nav-link" id="signup" href="{% url 'signup' %}">Signup</a><br>
+    </div>
+</div>
+</body>
+</html>

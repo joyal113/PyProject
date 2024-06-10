@@ -1,0 +1,8 @@
+venv/
+library_management_system/__pycache__/
+library_management_system/library/__pycache__/
+library_management_system/library/migrations/__pycache__/
+library_management_system/library_management_system/__pycache__/
+library_management_system/db.sqlite3
+.idea/
+library_management_system/library_management_system/__pycache__/
